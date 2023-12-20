@@ -1,0 +1,4 @@
+@EndUserText.label: 'Model'
+define service ZSD_MODEL_005 {
+  expose ZC_MODEL_005;
+}

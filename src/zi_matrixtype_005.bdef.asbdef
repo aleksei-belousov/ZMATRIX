@@ -1,0 +1,72 @@
+managed;
+strict ( 2 );
+with draft;
+define behavior for ZI_MATRIXTYPE_005 alias MatrixType
+implementation in class zbp_i_matrixtype_005 unique
+persistent table zmatrixtype_005
+draft table zmatrixtype_005d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field (  numbering : managed, readonly ) MatrixTypeUUID;
+
+//  association _TypeSize { create ( features : instance, authorization : update ); with draft; }
+  association _BackSize { create ( features : instance, authorization : update ); with draft; }
+  association _CupSize { create ( features : instance, authorization : update ); with draft; }
+
+  draft action Resume with additional implementation;
+  draft action Edit with additional implementation;
+  draft action Activate with additional implementation optimized;
+  draft action Discard /*with additional implementation*/;
+
+  draft determine action Prepare {
+    //determination on_prepare;
+  }
+
+}
+
+define behavior for ZI_BACKSIZE_005 alias BackSize
+implementation in class zbp_i_backsize_005 unique
+persistent table zbacksize_005
+draft table zbacksize_005d
+lock dependent by _MatrixType
+authorization dependent by _MatrixType
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) BackSizeUUID;
+  field ( readonly ) MatrixTypeUUID;
+//  field ( readonly ) Back;
+  field ( readonly ) LocalLastChangedAt;
+
+  association _MatrixType { with draft; }
+
+}
+
+define behavior for ZI_CUPSIZE_005 alias CupSize
+implementation in class zbp_i_cupsize_005 unique
+persistent table zcupsize_005
+draft table zcupsize_005d
+lock dependent by _MatrixType
+authorization dependent by _MatrixType
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) CupSizeUUID;
+  field ( readonly ) MatrixTypeUUID;
+//  field ( readonly ) Back;
+  field ( readonly ) LocalLastChangedAt;
+
+  association _MatrixType { with draft; }
+
+}

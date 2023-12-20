@@ -1,0 +1,51 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo: { typeName: 'Backsize',
+                  typeNamePlural: 'Backsize',
+                  title: { type: #STANDARD, label: 'Backsize', value: 'BackSizeID' } },
+    presentationVariant: [{ sortOrder: [{ by: 'BackSizeID', direction: #ASC }] }] }
+
+annotate entity ZC_BACKSIZE_005 with 
+{
+
+    @UI.facet: [ { id:          'Size',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Size',
+                   position:    10 }]
+
+    @UI: {  lineItem:       [ { position: 10, label: 'Back Size UUID' } ],
+            identification: [ { position: 10, label: 'Back Size UUID' } ] }
+    @UI.hidden: true
+    BackSizeUUID;
+
+    @UI: {  lineItem:       [ { position: 20, label: 'Matrix Type UUID' } ],
+            identification: [ { position: 20, label: 'Matrix Type UUID' } ] }
+    @UI.hidden: true
+    MatrixTypeUUID;
+    
+    @UI: {  lineItem:       [ { position: 30, label: 'Backsize', cssDefault.width: '250px' } ],
+            identification: [ { position: 30, label: 'Backsize' } ] }
+    BackSizeID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Description', cssDefault.width: '250px' } ],
+            identification: [ { position: 40, label: 'Description' } ] }
+    Description;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'FR', cssDefault.width: '250px' } ],
+            identification: [ { position: 50, label: 'FR' } ] }
+    BackSizeFR;
+
+    @UI: {  lineItem:       [ { position: 60, label: 'US', cssDefault.width: '250px' } ],
+            identification: [ { position: 60, label: 'US' } ] }
+    BackSizeUS;
+
+    @UI: {  lineItem:       [ { position: 70, label: 'GB', cssDefault.width: '250px' } ],
+            identification: [ { position: 70, label: 'GB' } ] }
+    BackSizeGB;
+
+    @UI: {  lineItem:       [ { position: 80, label: 'Sort', cssDefault.width: '250px' } ],
+            identification: [ { position: 80, label: 'Sort' } ] }
+    Sort;
+
+}

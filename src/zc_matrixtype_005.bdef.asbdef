@@ -1,0 +1,36 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_MATRIXTYPE_005 alias MatrixType
+{
+  use create;
+  use update;
+  use delete;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+//  use association _TypeSize { create; with draft; }
+  use association _BackSize { create; with draft; }
+  use association _CupSize { create; with draft; }
+}
+
+define behavior for ZC_BACKSIZE_005 alias BackSize
+{
+  use update;
+  use delete;
+
+  use association _MatrixType { with draft; }
+}
+
+define behavior for ZC_CUPSIZE_005 alias CupSize
+{
+  use update;
+  use delete;
+
+  use association _MatrixType { with draft; }
+}

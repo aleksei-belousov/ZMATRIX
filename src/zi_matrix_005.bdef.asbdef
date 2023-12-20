@@ -1,0 +1,154 @@
+managed with additional save implementation in class zbp_i_matrix_005 unique;
+strict ( 2 );
+with draft;
+define behavior for ZI_MATRIX_005 alias Matrix
+implementation in class zbp_i_matrix_005 unique
+persistent table zmatrix_005
+draft table zmatrix_005d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  // Actions:
+  action check_atp;
+  action update_items;
+  action copy_color;
+  action create_sales_order;
+  action get_sales_order;
+  action update_sales_order;
+  action check_sizes;
+
+  // Events:
+  determination on_create on modify { field MatrixUUID; }
+  determination on_model_modify on modify { field Model; }
+  determination on_scheme_save on save { field Model, Color, Country, MatrixTypeID; }
+  determination on_sales_order_create on modify { field SalesOrderID, SalesOrderURL; } // to enable refreshing the fields
+  determination on_scheme_modify on modify { field Model, Color, Country, MatrixTypeID, PurchaseOrderByCustomer; } // on a change of scheme or Customer Reference
+
+  association _Sizehead { create ( features : instance, authorization : update ); with draft; }
+  association _Size { create ( features : instance, authorization : update ); with draft; }
+  association _Item { create ( features : instance, authorization : update ); with draft; }
+
+  field ( numbering : managed, readonly ) MatrixUUID;
+  field ( readonly ) MatrixID;
+  field ( readonly ) SalesOrderID;
+  field ( readonly ) MatrixTypeID;
+  field ( readonly ) ModelRef;
+  field ( readonly ) ColorRef;
+  field ( readonly ) CountryRef;
+  field ( readonly ) MatrixTypeRef;
+
+// David: "I think it would be great if you could mark the required fields with the usual SAP red „*”,
+// and throw an error message pointing to the incomplete required fields if once tries to save the order,
+// and something is not filled. The error message is currently the following (I did not filled the Sold To Party).
+// I believe the mandatory fields should be the Sales Order Type, Sales Organization, Distribution Channel,
+// Organization Division, Sold To Party, Customer Reference."
+  field ( mandatory ) SalesOrderType;
+  field ( mandatory ) SalesOrganization;
+  field ( mandatory ) DistributionChannel;
+  field ( mandatory ) OrganizationDivision;
+  field ( mandatory ) SoldToParty;
+  field ( mandatory ) PurchaseOrderByCustomer; // Customer Reference
+
+  validation validate_data on save { create; update; field  SalesOrderType, SalesOrganization, DistributionChannel, OrganizationDivision, PurchaseOrderByCustomer; }
+
+//  draft determine action Prepare {
+//    determination on_prepare;
+//  }
+  draft determine action Prepare {
+    validation validate_data;
+  }
+  draft action Resume with additional implementation;
+  draft action Edit with additional implementation;
+  draft action Activate with additional implementation optimized;
+  draft action Discard /*with additional implementation*/;
+
+  side effects
+  {
+    field Model affects field MatrixTypeID, entity _Size;
+    field Color affects entity _Size;
+    field MatrixTypeID affects entity _Size;
+    field Country affects entity _Size;
+    action check_atp affects entity _Item;
+    action update_items affects entity _Item;
+    action copy_color affects entity _Item;
+    action create_sales_order affects field SalesOrderID, field SalesOrderURL;
+    action get_sales_order affects field SalesOrderID, field SalesOrderURL, entity _Item, entity _Size;
+    determine action Prepare executed on $self affects $self;
+  }
+
+}
+
+define behavior for ZI_SIZEHEAD_005 alias Sizehead
+implementation in class zbp_i_sizehead_005 unique
+persistent table zsizehead_005
+draft table zsizehead_005d
+lock dependent by _Matrix
+authorization dependent by _Matrix
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( readonly ) MatrixUUID;
+  field ( readonly ) SizeID;
+  field ( readonly ) Back;
+  field ( readonly ) BackSizeID;
+  field ( readonly ) LocalLastChangedAt;
+
+  association _Matrix { with draft; }
+
+}
+
+define behavior for ZI_SIZE_005 alias Size
+implementation in class zbp_i_size_005 unique
+persistent table zsize_005
+draft table zsize_005d
+lock dependent by _Matrix
+authorization dependent by _Matrix
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  determination on_size_modify on modify { field a; }
+
+  field ( readonly ) MatrixUUID;
+  field ( readonly ) SizeID;
+  field ( readonly ) Back;
+  field ( readonly ) BackSizeID;
+  field ( readonly ) LocalLastChangedAt;
+
+  association _Matrix { with draft; }
+
+}
+
+define behavior for ZI_ITEM_005 alias Item
+implementation in class zbp_i_item_005 unique
+persistent table zitem_005
+draft table zitem_005d
+lock dependent by _Matrix
+authorization dependent by _Matrix
+etag master LocalLastChangedAt
+{
+  update;
+  delete;
+
+  field ( readonly ) MatrixUUID;
+  field ( readonly : update ) ItemID;     // readonly but updatable on creation
+  field ( readonly : update ) ItemID2;    // - "" -
+  field ( readonly : update ) Product;    // - "" -
+  field ( readonly : update ) Quantity;
+  field ( readonly : update ) Stock;
+  field ( readonly : update ) AvailableStock;
+  field ( readonly : update ) Availability;
+  field ( readonly : update ) LocalLastChangedAt;
+
+  association _Matrix { with draft; }
+
+}

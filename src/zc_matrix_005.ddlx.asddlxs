@@ -1,0 +1,434 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Sales Order',
+                typeNamePlural: 'Sales Orders',
+                title: { type: #STANDARD, label: 'Sales Order', value: 'MatrixID' } },
+  presentationVariant: [{ sortOrder: [{ by: 'SalesOrderID', direction: #ASC }] }] }
+annotate entity ZC_MATRIX_005 with 
+{
+
+    @UI.facet: [{ id:            'Matrix',
+                  purpose:       #STANDARD,
+                  type:          #IDENTIFICATION_REFERENCE,
+                  label:         'Sales Order',
+                  position:      10 },
+
+                // Size Head - hidden
+                { hidden: true,
+                  label:         'Size Head (hidden)',
+                  id:            'Sizehead',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      20,
+                  targetElement: '_Sizehead' },
+
+                // Static View for Size table - hidden
+                { hidden: true,
+                  label:         'Size (hidden)',
+                  id:            'Size',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                  
+                // Dynamic Views for Size table - managed:
+                { targetQualifier: 'SizeVariant00',
+                  hidden: #(Hidden00),
+                  label:         'Size',
+                  id:            'Size00',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant01',
+                  hidden: #(Hidden01),
+                  label:         'Size',
+                  id:            'Size01',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant02',
+                  hidden: #(Hidden02),
+                  label:         'Size',
+                  id:            'Size02',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant03',
+                  hidden: #(Hidden03),
+                  label:         'Size',
+                  id:            'Size03',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant04',
+                  hidden: #(Hidden04),
+                  label:         'Size',
+                  id:            'Size04',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant05',
+                  hidden: #(Hidden05),
+                  label:         'Size',
+                  id:            'Size05',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant06',
+                  hidden: #(Hidden06),
+                  label:         'Size',
+                  id:            'Size06',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant07',
+                  hidden: #(Hidden07),
+                  label:         'Size',
+                  id:            'Size07',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant08',
+                  hidden: #(Hidden08),
+                  label:         'Size',
+                  id:            'Size08',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant09',
+                  hidden: #(Hidden09),
+                  label:         'Size',
+                  id:            'Size09',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant10',
+                  hidden: #(Hidden10),
+                  label:         'Size',
+                  id:            'Size10',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant11',
+                  hidden: #(Hidden11),
+                  label:         'Size',
+                  id:            'Size11',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant12',
+                  hidden: #(Hidden12),
+                  label:         'Size',
+                  id:            'Size12',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant13',
+                  hidden: #(Hidden13),
+                  label:         'Size',
+                  id:            'Size13',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant14',
+                  hidden: #(Hidden14),
+                  label:         'Size',
+                  id:            'Size14',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant15',
+                  hidden: #(Hidden15),
+                  label:         'Size',
+                  id:            'Size15',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant16',
+                  hidden: #(Hidden16),
+                  label:         'Size',
+                  id:            'Size16',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant17',
+                  hidden: #(Hidden17),
+                  label:         'Size',
+                  id:            'Size17',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant18',
+                  hidden: #(Hidden18),
+                  label:         'Size',
+                  id:            'Size18',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant19',
+                  hidden: #(Hidden19),
+                  label:         'Size',
+                  id:            'Size19',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant20',
+                  hidden: #(Hidden20),
+                  label:         'Size',
+                  id:            'Size20',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant21',
+                  hidden: #(Hidden21),
+                  label:         'Size',
+                  id:            'Size21',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+                { targetQualifier: 'SizeVariant22',
+                  hidden: #(Hidden22),
+                  label:         'Size',
+                  id:            'Size22',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  position:      30,
+                  targetElement: '_Size' },
+
+                { id:            'Item',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  label:         'Item',
+                  position:      40,
+                  targetElement: '_Item'}]
+
+    @UI.hidden: true
+    MatrixUUID;
+    
+    @UI: { lineItem:       [ { position: 10, label: 'Matrix ID', importance: #HIGH, cssDefault.width: '300px' } ],
+           identification: [ { position: 10, label: 'Matrix ID', cssDefault.width: '300px' } ],
+           selectionField: [ { position: 10 } ] }  
+    @UI.hidden: true
+    MatrixID;
+    
+    @UI: {  lineItem:       [ { position: 30, label: 'Sales Order ID', type: #WITH_URL, url: 'SalesOrderURL' } ],
+            identification: [ { position: 30, label: 'Sales Order ID', cssDefault.width: '300px', type: #WITH_URL, url: 'SalesOrderURL' },
+                              { type: #FOR_ACTION, dataAction: 'check_atp',           label: 'Check ATP',           position: 1 },
+                              { type: #FOR_ACTION, dataAction: 'update_items',        label: 'Update Items',        position: 2 },
+//                              { type: #FOR_ACTION, dataAction: 'copy_color',          label: 'Copy Color',          position: 3 },
+                              { type: #FOR_ACTION, dataAction: 'create_sales_order',  label: 'Create Sales Order',  position: 4 },
+                              { type: #FOR_ACTION, dataAction: 'update_sales_order',  label: 'Update Sales Order',  position: 5 },
+                              { type: #FOR_ACTION, dataAction: 'get_sales_order',     label: 'Get Sales Order',     position: 6 } ],
+            selectionField: [ { position: 30 } ] }
+    @UI: { textArrangement: #TEXT_ONLY }
+    SalesOrderID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Sales Order Type', cssDefault.width: '300px' } ],
+            identification: [ { position: 40, label: 'Sales Order Type', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 40 } ] }
+    SalesOrderType;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'Sales Organization', cssDefault.width: '300px' } ],
+            identification: [ { position: 50, label: 'Sales Organization', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 50 } ] }
+    SalesOrganization;
+    
+    @UI: {  lineItem:       [ { position: 60, label: 'Distribution Channel', cssDefault.width: '300px' } ],
+            identification: [ { position: 60, label: 'Distribution Channel', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 60 } ] }
+    DistributionChannel;
+    
+    @UI: {  lineItem:       [ { position: 70, label: 'Organization Division', cssDefault.width: '300px' } ],
+            identification: [ { position: 70, label: 'Organization Division', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 70 } ] }
+    OrganizationDivision;
+
+    @UI: {  lineItem:       [ { position: 80, label: 'Sold To Party', cssDefault.width: '300px', type: #WITH_URL, url: 'CustomerURL' } ],
+            identification: [ { position: 80, label: 'Sold To Party', cssDefault.width: '300px', type: #WITH_URL, url: 'CustomerURL' } ],
+            selectionField: [ { position: 80 } ] }
+    @UI: { textArrangement: #TEXT_ONLY }
+    SoldToParty;
+
+    @UI: {  lineItem:       [ { position: 90, label: 'Model', cssDefault.width: '300px', exclude: true } ],
+            identification: [ { position: 90, label: 'Model', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 90, exclude: true } ]}
+    Model;
+
+    @UI: {  lineItem:       [ { position: 100, label: 'Color', cssDefault.width: '300px', criticality:'Criticality01', criticalityRepresentation: #WITHOUT_ICON, exclude: true } ],
+            identification: [ { position: 100, label: 'Color', cssDefault.width: '300px', criticality:'Criticality01', criticalityRepresentation: #WITHOUT_ICON } ],
+            selectionField: [ { position: 100, exclude: true } ] }
+    Color;
+
+    @UI: {  lineItem:       [ { position: 110, label: 'Matrix Type', cssDefault.width: '200px', exclude: true } ],
+            identification: [ { position: 110, label: 'Matrix Type', cssDefault.width: '200px' } ],
+            selectionField: [ { position: 110, exclude: true } ] }
+    MatrixTypeID;
+
+    @UI: {  lineItem:       [ { position: 120, label: 'Country', cssDefault.width: '100px', exclude: true } ],
+            identification: [ { position: 120, label: 'Country', cssDefault.width: '100px' } ],
+            selectionField: [ { position: 120, exclude: true } ] }
+    Country;
+
+    @UI: {  lineItem:       [ { position: 130, label: 'Customer Reference', cssDefault.width: '300px' } ],
+            identification: [ { position: 130, label: 'Customer Reference', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 130 } ] }
+    PurchaseOrderByCustomer;
+
+    @UI: {  lineItem:       [ { position: 140, label: 'Requested Delivery Date', cssDefault.width: '300px' } ],
+            identification: [ { position: 140, label: 'Requested Delivery Date', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 140 } ] }
+    RequestedDeliveryDate;
+
+    @UI: {  lineItem:       [ { position: 150, label: 'Copy Color', cssDefault.width: '300px', exclude: true } ],
+            identification: [ { position: 150, label: 'Copy Color', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 150, exclude: true } ] }
+    @UI.hidden: true
+    Copying;
+
+    @UI: {  lineItem:       [ { position: 160, label: 'Models Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'ModelRefURL', exclude: true } ],
+            identification: [ { position: 160, label: 'Models Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'ModelRefURL' } ] }
+    ModelRef;
+
+    @UI.hidden: true
+    ModelRefURL;
+
+    @UI: {  lineItem:       [ { position: 180, label: 'Colors Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'ColorRefURL', exclude: true } ],
+            identification: [ { position: 180, label: 'Colors Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'ColorRefURL' } ] }
+    ColorRef;
+
+    @UI.hidden: true
+    ColorRefURL;
+
+    @UI: {  lineItem:       [ { position: 200, label: 'Countries Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'CountryRefURL', exclude: true } ],
+            identification: [ { position: 200, label: 'Countries Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'CountryRefURL' } ] }
+    CountryRef;
+
+    @UI.hidden: true
+    CountryRefURL;
+
+    @UI: {  lineItem:       [ { position: 220, label: 'Matrix Types Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'MatrixTypeRefURL', exclude: true } ],
+            identification: [ { position: 220, label: 'Matrix Types Maintenance', cssDefault.width: '200px', type: #WITH_URL, url: 'MatrixTypeRefURL' } ] }
+    MatrixTypeRef;
+
+    @UI.hidden: true
+    MatrixTypeRefURL;
+
+    @UI.hidden: true
+    SalesOrderURL;
+
+    @UI.hidden: true
+    CustomerURL;
+
+    @UI.hidden: true
+    Hidden01; // abap_boolean
+
+    @UI.hidden: true
+    Hidden02; // abap_boolean
+
+    @UI.hidden: true
+    Hidden03; // abap_boolean
+
+    @UI.hidden: true
+    Hidden04; // abap_boolean
+
+    @UI.hidden: true
+    Hidden05; // abap_boolean
+
+    @UI.hidden: true
+    Hidden06; // abap_boolean
+
+    @UI.hidden: true
+    Hidden07; // abap_boolean
+
+    @UI.hidden: true
+    Hidden08; // abap_boolean
+
+    @UI.hidden: true
+    Hidden09; // abap_boolean
+
+    @UI.hidden: true
+    Hidden10; // abap_boolean
+
+    @UI.hidden: true
+    Hidden11; // abap_boolean
+
+    @UI.hidden: true
+    Hidden12; // abap_boolean
+
+    @UI.hidden: true
+    Hidden13; // abap_boolean
+
+    @UI.hidden: true
+    Hidden14; // abap_boolean
+
+    @UI.hidden: true
+    Hidden15; // abap_boolean
+
+    @UI.hidden: true
+    Hidden16; // abap_boolean
+
+    @UI.hidden: true
+    Hidden17; // abap_boolean
+
+    @UI.hidden: true
+    Hidden18; // abap_boolean
+
+    @UI.hidden: true
+    Hidden19; // abap_boolean
+
+    @UI.hidden: true
+    Hidden20; // abap_boolean
+
+    @UI.hidden: true
+    Hidden21; // abap_boolean
+
+    @UI.hidden: true
+    Hidden22; // abap_boolean
+
+    @UI.hidden: true
+    Criticality01;
+
+    @UI.hidden: true
+    CreationDate;
+
+    @UI.hidden: true
+    CreationTime;
+
+    @UI.hidden: true
+    CreatedBy;
+
+    @UI.hidden: true
+    CreatedAt;
+
+    @UI.hidden: true
+    LastChangedBy;
+
+    @UI.hidden: true
+    LastChangedAt;
+
+    @UI.hidden: true
+    LocalLastChangedAt;
+
+}

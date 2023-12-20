@@ -1,0 +1,6 @@
+@EndUserText.label: 'Matrix Type'
+define service ZSD_MATRIXTYPE_005 {
+  expose ZC_MATRIXTYPE_005;
+  expose ZC_BACKSIZE_005;
+  expose ZC_CUPSIZE_005;
+}

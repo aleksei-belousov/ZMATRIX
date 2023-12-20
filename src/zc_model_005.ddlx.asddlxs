@@ -1,0 +1,49 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Model',
+                typeNamePlural: 'Model',
+                title: { type: #STANDARD, label: 'Model', value: 'ModelID' } },
+  presentationVariant: [{ sortOrder: [{ by: 'ModelID', direction: #ASC }] }] }
+
+annotate entity ZC_MODEL_005 with 
+{
+
+    @UI.facet: [ { id:          'Model',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Model',
+                   position:    10 }]
+
+    @UI.hidden: true
+    ModelUUID;
+
+    @UI: {  lineItem:       [ { position: 30, label: 'Model ID', cssDefault.width: '300px' } ],
+            identification: [ { position: 30, label: 'Model ID', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 30 } ] }
+    ModelID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Description', cssDefault.width: '300px' } ],
+            identification: [ { position: 40, label: 'Description', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 40 } ] }
+    Description;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'Matrix Type ID', cssDefault.width: '300px' } ],
+            identification: [ { position: 50, label: 'Matrix Type ID', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 50 } ] }
+    MatrixTypeID;
+
+    @UI.hidden: true
+    CreatedBy;
+
+    @UI.hidden: true
+    CreatedAt;
+
+    @UI.hidden: true
+    LastChangedBy;
+
+    @UI.hidden: true
+    LastChangedAt;
+
+    @UI.hidden: true
+    LocalLastChangedAt;    
+}

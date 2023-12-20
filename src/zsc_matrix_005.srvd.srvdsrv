@@ -1,0 +1,11 @@
+@EndUserText.label: 'ZSC_MATRIX_005'
+@OData.schema.name: 'cds_zsd_matrix_005'
+define service ZSC_MATRIX_005 {
+ expose ZRAP_I_CUSTOMER; 
+ expose ZRAP_I_DRAFTADMINISTRATIVEDATA; 
+ expose ZRAP_ZC_ITEM_005; 
+ expose ZRAP_ZC_MATRIX_005; 
+ expose ZRAP_ZC_SIZEHEAD_005; 
+ expose ZRAP_ZC_SIZE_005; 
+ expose ZRAP_ZI_SALESORDERTYPE; 
+ } 

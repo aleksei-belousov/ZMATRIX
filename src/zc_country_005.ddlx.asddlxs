@@ -1,0 +1,44 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Country',
+                typeNamePlural: 'Country',
+                title: { type: #STANDARD, label: 'Country', value: 'CountryID' } },
+  presentationVariant: [{ sortOrder: [{ by: 'CountryID', direction: #ASC }] }] }
+
+annotate entity ZC_COUNTRY_005 with 
+{
+
+    @UI.facet: [ { id:          'Country',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Country',
+                   position:    10 }]
+
+    @UI.hidden: true
+    CountryUUID;
+ 
+  @UI: {  lineItem:       [ { position: 30, label: 'Country ID', cssDefault.width: '300px' } ],
+          identification: [ { position: 30, label: 'Country ID', cssDefault.width: '300px' } ],
+          selectionField: [ { position: 30 } ] }
+    CountryID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Description', cssDefault.width: '300px' } ],
+            identification: [ { position: 40, label: 'Description', cssDefault.width: '300px' } ],
+            selectionField: [ { position: 40 } ] }
+    Description;
+
+    @UI.hidden: true
+    CreatedBy;
+
+    @UI.hidden: true
+    CreatedAt;
+
+    @UI.hidden: true
+    LastChangedBy;
+
+    @UI.hidden: true
+    LastChangedAt;
+
+    @UI.hidden: true
+    LocalLastChangedAt;
+ }

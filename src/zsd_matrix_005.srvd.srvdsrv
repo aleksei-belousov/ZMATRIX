@@ -1,0 +1,9 @@
+@EndUserText.label: 'Sales Order'
+define service ZSD_MATRIX_005 {
+  expose ZC_MATRIX_005;
+  expose ZC_SIZEHEAD_005;
+  expose ZC_SIZE_005;
+  expose ZC_ITEM_005;
+  expose ZI_SalesOrderType;
+  expose I_Customer;
+}

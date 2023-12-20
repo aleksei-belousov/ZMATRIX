@@ -1,0 +1,39 @@
+managed;
+strict ( 2 );
+with draft;
+define behavior for ZI_COUNTRY_005 alias Color
+implementation in class zbp_i_country_005 unique
+persistent table zcountry_005
+draft table zcountry_005d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) CountryUUID;
+
+  draft action Resume with additional implementation;
+  draft action Edit with additional implementation;
+  draft action Activate with additional implementation optimized;
+  draft action Discard /*with additional implementation*/;
+
+  draft determine action Prepare {
+    //determination on_prepare;
+  }
+
+  mapping for ZCOUNTRY_005
+  {
+    CountryUUID             = countryuuid;
+    CountryID               = countryid;
+    Description             = description;
+    CreatedBy               = createdby;
+    CreatedAt               = createdat;
+    LastChangedAt           = lastchangedat;
+    LastChangedBy           = lastchangedby;
+    LocalLastChangedAt      = locallastchangedat;
+  }
+}

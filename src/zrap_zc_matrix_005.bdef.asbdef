@@ -1,0 +1,8 @@
+ implementation abstract;
+ define behavior for ZRAP_ZC_MATRIX_005
+  etag master ETAG__ETAG
+ {
+  create;
+ update;
+ delete;
+ }

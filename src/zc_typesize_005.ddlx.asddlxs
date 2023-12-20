@@ -1,0 +1,66 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo: { typeName: 'Backsize / Capsize',
+                  typeNamePlural: 'Sizes',
+                  title: { type: #STANDARD, label: 'Backsize', value: 'Back' } },
+    presentationVariant: [{ sortOrder: [{ by: 'Back', direction: #ASC }] }] }
+
+annotate entity ZC_TYPESIZE_005 with 
+{
+    @UI.facet: [ { id:          'Size',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Size',
+                   position:    10 }]
+
+    @UI: {  lineItem:       [ { position: 20, label: 'Type Size UUID' } ],
+            identification: [ { position: 20, label: 'Type Size UUID' } ] }
+    @UI.hidden: true
+    TypeSizeUUID;
+
+    @UI: {  lineItem:       [ { position: 10, label: 'Matrix Type UUID' } ],
+            identification: [ { position: 10, label: 'Matrix Type UUID' } ] }
+    @UI.hidden: true
+    MatrixTypeUUID;
+
+    @UI: {  lineItem:       [ { position: 30, label: 'Backsize / Cupsize', cssDefault.width: '250px' } ],
+            identification: [ { position: 30, label: 'Backsize' } ] }
+    Back;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'A', cssDefault.width: '150px' } ],
+            identification: [ { position: 40, label: 'A' } ] }
+    A;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'B', cssDefault.width: '150px' } ],
+            identification: [ { position: 50, label: 'B' } ] }
+    B;
+
+    @UI: {  lineItem:       [ { position: 60, label: 'C', cssDefault.width: '150px' } ],
+            identification: [ { position: 60, label: 'C' } ] }
+    C;
+
+    @UI: {  lineItem:       [ { position: 70, label: 'D', cssDefault.width: '150px' } ],
+            identification: [ { position: 70, label: 'D' } ] }
+    D;
+
+    @UI: {  lineItem:       [ { position: 80, label: 'E', cssDefault.width: '150px' } ],
+            identification: [ { position: 80, label: 'E' } ] }
+    E;
+
+    @UI: {  lineItem:       [ { position: 90, label: 'F', cssDefault.width: '150px' } ],
+            identification: [ { position: 90, label: 'F' } ] }
+    F;
+
+    @UI: {  lineItem:       [ { position: 100, label: 'G', cssDefault.width: '150px' } ],
+            identification: [ { position: 100, label: 'G' } ] }
+    G;
+
+    @UI: {  lineItem:       [ { position: 110, label: 'H', cssDefault.width: '150px' } ],
+            identification: [ { position: 110, label: 'H' } ] }
+    H;
+
+    @UI: {  lineItem:       [ { position: 120, label: 'I', cssDefault.width: '150px' } ],
+            identification: [ { position: 120, label: 'I' } ] }
+    I;
+    
+}

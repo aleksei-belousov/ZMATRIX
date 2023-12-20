@@ -1,0 +1,93 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Item',
+                typeNamePlural: 'Items',
+                title: { type: #STANDARD, value: 'ItemID' } } }
+annotate entity ZC_ITEM_005 with 
+{
+    @UI.facet: [
+        {
+            id:            'Item',
+            purpose:       #STANDARD,
+            type:          #IDENTIFICATION_REFERENCE,
+            label:         'Item',
+            position:      10
+        }
+    ]
+
+    @UI: {  lineItem:       [ { position: 10, label: 'Matrix UUID', cssDefault.width: '300px' } ],
+            identification: [ { position: 10, label: 'Matrix UUID' } ] }
+    @UI.hidden:true 
+    MatrixUUID;
+
+    @UI: {  lineItem:       [ { position: 20, label: 'Item ID', cssDefault.width: '300px' } ],
+            identification: [ { position: 20, label: 'Item ID' } ] }
+    @UI.hidden:true 
+    ItemID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Item ID', cssDefault.width: '300px' } ],
+            identification: [ { position: 40, label: 'Item ID' } ] }
+    ItemID2;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'Model', cssDefault.width: '300px' } ],
+            identification: [ { position: 50, label: 'Model' } ] }
+    @UI.hidden:true 
+    Model;
+
+    @UI: {  lineItem:       [ { position: 60, label: 'Color', cssDefault.width: '300px' } ],
+            identification: [ { position: 60, label: 'Color' } ] }
+    @UI.hidden:true 
+    Color;
+
+    @UI: {  lineItem:       [ { position: 70, label: 'Cupsize', cssDefault.width: '300px' } ],
+            identification: [ { position: 70, label: 'Cupsize' } ] }
+    @UI.hidden:true 
+    Cupsize;
+
+    @UI: {  lineItem:       [ { position: 80, label: 'Backsize', cssDefault.width: '300px' } ],
+            identification: [ { position: 80, label: 'Backsize' } ] }
+    @UI.hidden:true 
+    Backsize;
+
+    @UI: {  lineItem:       [ { position: 90, label: 'Product', cssDefault.width: '300px', type: #WITH_URL, url: 'ProductURL' } ],
+            identification: [ { position: 90, label: 'Product' } ] }
+    Product;
+
+    @UI: {  lineItem:       [ { position: 100, label: 'Quantity', cssDefault.width: '300px' } ],
+            identification: [ { position: 100, label: 'Quantity' } ] }
+    Quantity;
+     
+    @UI: {  lineItem:       [ { position: 110, label: 'Stock', cssDefault.width: '300px' } ],
+            identification: [ { position: 110, label: 'Stock' } ] }
+    Stock;
+
+    @UI: {  lineItem:       [ { position: 120, label: 'Available Stock', cssDefault.width: '300px' } ],
+            identification: [ { position: 120, label: 'Available Stock' } ] }
+    AvailableStock;
+
+    @UI: {  lineItem:       [ { position: 130, label: 'Availability', cssDefault.width: '300px', criticality:'Criticality01', criticalityRepresentation: #WITH_ICON } ],
+            identification: [ { position: 130, label: 'Availability' } ] }
+    Availability;
+
+    @UI.hidden:true 
+    ProductURL;
+
+    @UI.hidden:true 
+    Criticality01;
+
+    @UI.hidden:true 
+    Createdby;
+
+    @UI.hidden:true 
+    Createdat;
+
+    @UI.hidden:true 
+    LastChangedBy;
+
+    @UI.hidden:true 
+    LastChangedAt;
+
+    @UI.hidden:true 
+    LocalLastChangedAt;
+
+}

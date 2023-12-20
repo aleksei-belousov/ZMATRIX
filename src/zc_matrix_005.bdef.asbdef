@@ -1,0 +1,54 @@
+projection;
+strict ( 2 );
+use draft;
+use side effects;
+
+define behavior for ZC_MATRIX_005 alias Matrix
+{
+  use create;
+  use update;
+  use delete;
+
+  use action check_atp;
+  use action update_items;
+  use action copy_color;
+  use action create_sales_order;
+  use action update_sales_order;
+  use action get_sales_order;
+//  use action test_odata;
+  use action check_sizes;
+
+  use action Resume;
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Prepare;
+
+  use association _Sizehead { /*create;*/ with draft; }
+  use association _Size { /*create;*/ with draft; }
+  use association _Item { create; with draft; }
+}
+
+define behavior for ZC_SIZEHEAD_005 alias Sizehead
+{
+  use update;
+  //use delete;
+
+  use association _Matrix { with draft; }
+}
+
+define behavior for ZC_SIZE_005 alias Size
+{
+  use update;
+  //use delete;
+
+  use association _Matrix { with draft; }
+}
+
+define behavior for ZC_ITEM_005 alias Item
+{
+  use update;
+  use delete;
+
+  use association _Matrix { with draft; }
+}

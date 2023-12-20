@@ -1,0 +1,64 @@
+@Metadata.layer: #CORE
+@UI: {
+  headerInfo: { typeName: 'Matrix Type',
+                typeNamePlural: 'Matrix Types',
+                title: { type: #STANDARD, label: 'Matrix Type', value: 'MatrixTypeID' } },
+  presentationVariant: [{ sortOrder: [{ by: 'MatrixTypeID', direction: #ASC }] }] }
+
+annotate entity ZC_MATRIXTYPE_005 with 
+{
+
+    @UI.facet: [{ id:            'MatrixType',
+                  purpose:       #STANDARD,
+                  type:          #IDENTIFICATION_REFERENCE,
+                  label:         'Matrix Type',
+                  position:      10 },
+--                { id:            'TypeSize',
+--                  purpose:       #STANDARD,
+--                  type:          #LINEITEM_REFERENCE,
+--                  label:         'Type Size',
+--                  position:      20,
+--                  targetElement: '_TypeSize'},
+                { id:            'BackSize',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  label:         'Back Size',
+                  position:      30,
+                  targetElement: '_BackSize'},
+                { id:            'CupSize',
+                  purpose:       #STANDARD,
+                  type:          #LINEITEM_REFERENCE,
+                  label:         'Cup Size',
+                  position:      40,
+                  targetElement: '_CupSize'}]
+
+
+    @UI.hidden: true
+    MatrixTypeUUID;
+
+    @UI: { lineItem:       [ { position: 10, label: 'Matrix Type ID', importance: #HIGH, cssDefault.width: '300px' } ],
+           identification: [ { position: 10, label: 'Matrix Type ID', cssDefault.width: '300px' } ],
+           selectionField: [ { position: 10 } ] }  
+    MatrixTypeID;
+
+    @UI: { lineItem:       [ { position: 20, label: 'Description', importance: #HIGH, cssDefault.width: '300px' } ],
+           identification: [ { position: 20, label: 'Description', cssDefault.width: '300px' } ],
+           selectionField: [ { position: 20 } ] }  
+    Description;
+
+    @UI.hidden: true
+    CreatedBy;
+
+    @UI.hidden: true
+    CreatedAt;
+
+    @UI.hidden: true
+    LastChangedBy;
+
+    @UI.hidden: true
+    LastChangedAt;
+
+    @UI.hidden: true
+    LocalLastChangedAt;
+
+}

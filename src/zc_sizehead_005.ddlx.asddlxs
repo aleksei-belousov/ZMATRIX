@@ -1,0 +1,80 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo: { typeName: 'Size Head',
+                  typeNamePlural: 'Size Head',
+                  title: { type: #STANDARD, label: 'Size Head', value: 'Back' } },
+    presentationVariant: [{ sortOrder: [{ by: 'Back', direction: #ASC }] }] }
+
+annotate entity ZC_SIZEHEAD_005 with 
+{
+    @UI.facet: [ { id:          'Sizehead',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Sizehead',
+                   position:    10 }]
+
+    //@UI: {  lineItem:       [ { position: 10, label: 'Matrix UUID' } ],
+    //        identification: [ { position: 10, label: 'Matrix UUID' } ] }
+    //atrixUUID;
+    
+    //@UI: {  lineItem:       [ { position: 10, label: 'Size ID' } ],
+    //        identification: [ { position: 10, label: 'Size ID' } ] }
+    //SizeID;
+
+    @UI: {  lineItem:       [ { position: 10, label: '', cssDefault.width: '250px' } ],
+            identification: [ { position: 10, label: '' } ] }
+    Back;
+
+    @UI: {  lineItem:       [ { position: 20, label: 'A', cssDefault.width: '250px' } ],
+            identification: [ { position: 20, label: 'A' } ] }
+    A;
+
+    @UI: {  lineItem:       [ { position: 30, label: 'B', cssDefault.width: '250px' } ],
+            identification: [ { position: 30, label: 'B' } ] }
+    B;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'C', cssDefault.width: '250px' } ],
+            identification: [ { position: 40, label: 'C' } ] }
+    C;
+
+    @UI: {  lineItem:       [ { position: 50, label: 'D', cssDefault.width: '250px' } ],
+            identification: [ { position: 50, label: 'D' } ] }
+    D;
+
+    @UI: {  lineItem:       [ { position: 60, label: 'E', cssDefault.width: '250px' } ],
+            identification: [ { position: 60, label: 'E' } ] }
+    E;
+
+    @UI: {  lineItem:       [ { position: 70, label: 'F', cssDefault.width: '250px' } ],
+            identification: [ { position: 70, label: 'F' } ] }
+    F;
+
+    @UI: {  lineItem:       [ { position: 80, label: 'G', cssDefault.width: '250px' } ],
+            identification: [ { position: 80, label: 'G' } ] }
+    G;
+
+    @UI: {  lineItem:       [ { position: 90, label: 'H', cssDefault.width: '250px' } ],
+            identification: [ { position: 90, label: 'H' } ] }
+    H;
+
+    @UI: {  lineItem:       [ { position: 100, label: 'I', cssDefault.width: '250px' } ],
+            identification: [ { position: 100, label: 'I' } ] }
+    I;
+
+    @UI: {  lineItem:       [ { position: 110, label: 'J', cssDefault.width: '250px' } ],
+            identification: [ { position: 110, label: 'J' } ] }
+    J;
+
+    @UI: {  lineItem:       [ { position: 120, label: 'K', cssDefault.width: '250px' } ],
+            identification: [ { position: 120, label: 'K' } ] }
+    K;
+
+    @UI: {  lineItem:       [ { position: 130, label: 'L', cssDefault.width: '250px' } ],
+            identification: [ { position: 130, label: 'L' } ] }
+    L;
+
+    //@UI: {  lineItem:       [ { position: 140, label: '', cssDefault.width: '250px' } ],
+    //        identification: [ { position: 140, label: '' } ] }
+    //BackSizeID;
+
+}

@@ -1,0 +1,39 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo: { typeName: 'Cupsize',
+                  typeNamePlural: 'Cupsize',
+                  title: { type: #STANDARD, label: 'Cupsize', value: 'CupSizeID' } },
+    presentationVariant: [{ sortOrder: [{ by: 'CupSizeID', direction: #ASC }] }] }
+
+annotate entity ZC_CUPSIZE_005 with 
+{
+
+    @UI.facet: [ { id:          'Cupsize',
+                   purpose:     #STANDARD,
+                   type:        #IDENTIFICATION_REFERENCE,
+                   label:       'Cupsize',
+                   position:    10 }]
+
+    @UI: {  lineItem:       [ { position: 10, label: 'Cup Size UUID' } ],
+            identification: [ { position: 10, label: 'Cup Size UUID' } ] }
+    @UI.hidden: true
+    CupSizeUUID;
+
+    @UI: {  lineItem:       [ { position: 20, label: 'Matrix Type UUID' } ],
+            identification: [ { position: 20, label: 'Matrix Type UUID' } ] }
+    @UI.hidden: true
+    MatrixTypeUUID;
+    
+    @UI: {  lineItem:       [ { position: 30, label: 'Cupsize', cssDefault.width: '250px' } ],
+            identification: [ { position: 30, label: 'Cupsize' } ] }
+    CupSizeID;
+
+    @UI: {  lineItem:       [ { position: 40, label: 'Description', cssDefault.width: '250px' } ],
+            identification: [ { position: 40, label: 'Description' } ] }
+    Description;
+    
+    @UI: {  lineItem:       [ { position: 50, label: 'Sort', cssDefault.width: '250px' } ],
+            identification: [ { position: 50, label: 'Sort' } ] }
+    Sort;
+
+}

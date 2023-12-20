@@ -1,0 +1,28 @@
+managed;
+strict ( 2 );
+with draft;
+define behavior for ZI_MODEL_005 alias Model
+implementation in class zbp_i_model_005 unique
+persistent table zmodel_005
+draft table zmodel_005d
+lock master
+total etag LastChangedAt
+authorization master ( instance )
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) ModelUUID;
+
+  draft action Resume with additional implementation;
+  draft action Edit with additional implementation;
+  draft action Activate with additional implementation optimized;
+  draft action Discard /*with additional implementation*/;
+
+  draft determine action Prepare {
+    //determination on_prepare;
+  }
+
+}
