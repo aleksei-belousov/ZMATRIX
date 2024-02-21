@@ -3,5 +3,7 @@ protected section.
 private section.
 ENDCLASS.
 
+
+
 CLASS ZBP_I_MATRIXTYPE_005 IMPLEMENTATION.
 ENDCLASS.

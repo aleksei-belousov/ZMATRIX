@@ -10,7 +10,10 @@ CLASS zcl_sd_sls_check_before_save DEFINITION PUBLIC FINAL CREATE PUBLIC .
 
 ENDCLASS.
 
+
+
 CLASS ZCL_SD_SLS_CHECK_BEFORE_SAVE IMPLEMENTATION.
+
 
   METHOD if_sd_sls_check_before_save~check_document.
 

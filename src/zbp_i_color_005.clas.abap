@@ -3,5 +3,7 @@ protected section.
 private section.
 ENDCLASS.
 
+
+
 CLASS ZBP_I_COLOR_005 IMPLEMENTATION.
 ENDCLASS.
