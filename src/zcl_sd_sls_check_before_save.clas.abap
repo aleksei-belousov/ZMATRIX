@@ -17,6 +17,8 @@ CLASS ZCL_SD_SLS_CHECK_BEFORE_SAVE IMPLEMENTATION.
 
   METHOD if_sd_sls_check_before_save~check_document.
 
+*   RETURN.
+
     SELECT SINGLE * FROM zc_matrix_005 WHERE ( SalesOrderID = @salesdocument-salesdocument ) INTO @DATA(wa_matrix).
 
 *   Check and Update Matrix [Items] if necessary

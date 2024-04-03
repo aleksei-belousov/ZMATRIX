@@ -227,20 +227,20 @@ annotate entity ZC_MATRIX_005 with
     @UI.hidden: true
     MatrixUUID;
     
-    @UI: { lineItem:       [ { position: 10, label: 'Matrix ID', importance: #HIGH, cssDefault.width: '300px' } ],
-           identification: [ { position: 10, label: 'Matrix ID', cssDefault.width: '300px' } ],
+    @UI: { lineItem:       [ { position: 10, label: 'Matrix ID', importance: #HIGH, cssDefault.width: '150px' } ],
+//           identification: [ { position: 10, label: 'Matrix ID', cssDefault.width: '150px' } ],
            selectionField: [ { position: 10 } ] }  
-    @UI.hidden: true
+//  @UI.hidden: true
     MatrixID;
     
     @UI: {  lineItem:       [ { position: 30, label: 'Sales Order ID', type: #WITH_URL, url: 'SalesOrderURL' } ],
             identification: [ { position: 30, label: 'Sales Order ID', cssDefault.width: '300px', type: #WITH_URL, url: 'SalesOrderURL' },
                               { type: #FOR_ACTION, dataAction: 'check_atp',           label: 'Check ATP',           position: 1 },
-                              { type: #FOR_ACTION, dataAction: 'update_items',        label: 'Update Items',        position: 2 },
-//                              { type: #FOR_ACTION, dataAction: 'copy_color',          label: 'Copy Color',          position: 3 },
+                              { type: #FOR_ACTION, dataAction: 'update_items',        label: 'Update Items',        position: 2 }/*,
+                              { type: #FOR_ACTION, dataAction: 'copy_color',          label: 'Copy Color',          position: 3 }*/,
                               { type: #FOR_ACTION, dataAction: 'create_sales_order',  label: 'Create Sales Order',  position: 4 },
-                              { type: #FOR_ACTION, dataAction: 'update_sales_order',  label: 'Update Sales Order',  position: 5 },
-                              { type: #FOR_ACTION, dataAction: 'get_sales_order',     label: 'Get Sales Order',     position: 6 } ],
+                              { type: #FOR_ACTION, dataAction: 'update_sales_order',  label: 'Update Sales Order',  position: 5 }/*,
+                              { type: #FOR_ACTION, dataAction: 'get_sales_order',     label: 'Get Sales Order',     position: 6 }*/ ],
             selectionField: [ { position: 30 } ] }
     @UI: { textArrangement: #TEXT_ONLY }
     SalesOrderID;
@@ -341,6 +341,9 @@ annotate entity ZC_MATRIX_005 with
     @UI.hidden: true
     CustomerURL;
 
+    @UI.hidden: true
+    Hidden00; // abap_boolean
+    
     @UI.hidden: true
     Hidden01; // abap_boolean
 

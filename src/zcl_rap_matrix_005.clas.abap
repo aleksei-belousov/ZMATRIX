@@ -37,6 +37,13 @@ CLASS ZCL_RAP_MATRIX_005 IMPLEMENTATION.
 
     DATA tabix TYPE sy-tabix.
 
+*   There is not yet Sales Order ID on Creation and not necessary to check items, therefore exit
+    IF ( i_salesdocument-salesdocument IS INITIAL ).
+        RETURN.
+    ENDIF.
+
+*   If some change on already existing Sales Order:
+
 *   Get Matrix
     SELECT SINGLE * FROM zc_matrix_005 WHERE ( SalesOrderID = @i_salesdocument-salesdocument ) INTO @DATA(wa_matrix).
     IF ( sy-subrc = 0 ).

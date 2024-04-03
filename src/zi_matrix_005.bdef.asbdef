@@ -28,7 +28,7 @@ etag master LocalLastChangedAt
   determination on_model_modify on modify { field Model; }
   determination on_scheme_save on save { field Model, Color, Country, MatrixTypeID; }
   determination on_sales_order_create on modify { field SalesOrderID, SalesOrderURL; } // to enable refreshing the fields
-  determination on_scheme_modify on modify { field Model, Color, Country, MatrixTypeID, PurchaseOrderByCustomer; } // on a change of scheme or Customer Reference
+  determination on_scheme_modify on modify { field Model, Color, Country, MatrixTypeID /*, PurchaseOrderByCustomer*/; } // on a change of scheme or Customer Reference
 
   association _Sizehead { create ( features : instance, authorization : update ); with draft; }
   association _Size { create ( features : instance, authorization : update ); with draft; }
@@ -42,6 +42,8 @@ etag master LocalLastChangedAt
   field ( readonly ) ColorRef;
   field ( readonly ) CountryRef;
   field ( readonly ) MatrixTypeRef;
+//  field ( readonly ) PurchaseOrderByCustomer;   // comes from Sales Order (via enhancement) (must be non readonly to be updated)
+//  field ( readonly ) RequestedDeliveryDate;     // comes from Sales Order (via enhancement)
 
 // David: "I think it would be great if you could mark the required fields with the usual SAP red „*”,
 // and throw an error message pointing to the incomplete required fields if once tries to save the order,
@@ -53,7 +55,7 @@ etag master LocalLastChangedAt
   field ( mandatory ) DistributionChannel;
   field ( mandatory ) OrganizationDivision;
   field ( mandatory ) SoldToParty;
-  field ( mandatory ) PurchaseOrderByCustomer; // Customer Reference
+//  field ( mandatory ) PurchaseOrderByCustomer; // Customer Reference
 
   validation validate_data on save { create; update; field  SalesOrderType, SalesOrganization, DistributionChannel, OrganizationDivision, PurchaseOrderByCustomer; }
 
@@ -77,7 +79,7 @@ etag master LocalLastChangedAt
     action check_atp affects entity _Item;
     action update_items affects entity _Item;
     action copy_color affects entity _Item;
-    action create_sales_order affects field SalesOrderID, field SalesOrderURL;
+    action create_sales_order affects field SalesOrderID, field SalesOrderURL, field PurchaseOrderByCustomer, field RequestedDeliveryDate;
     action get_sales_order affects field SalesOrderID, field SalesOrderURL, entity _Item, entity _Size;
     determine action Prepare executed on $self affects $self;
   }

@@ -78,7 +78,8 @@ CLASS lhc_matrix DEFINITION INHERITING FROM cl_abap_behavior_handler.
         VALUE(is_draft)             TYPE abp_behv_flag
         VALUE(i_matrixuuid)         TYPE zi_matrix_005-MatrixUUID
         VALUE(i_model)              TYPE zi_matrix_005-Model
-        VALUE(i_color)              TYPE zi_matrix_005-Color.
+        VALUE(i_color)              TYPE zi_matrix_005-Color
+        VALUE(i_feature)            TYPE string OPTIONAL.
 
 *   Get Sales Order and Update Matrix Items
     METHODS get_sales_order_internal
@@ -194,6 +195,11 @@ CLASS lhc_matrix IMPLEMENTATION.
                 WHEN 'OR'. wa_matrix_005-SalesOrderType = 'TA'.
             ENDCASE.
 
+*           Requested Delivery Date must be filled (else "Save failed" error message on save)
+            IF ( wa_matrix_005-RequestedDeliveryDate IS INITIAL ).
+                wa_matrix_005-RequestedDeliveryDate = cl_abap_context_info=>get_system_date( ).
+            ENDIF.
+
 *           Make Sales Order (Header)
             it_salesorder = VALUE #(
                 (
@@ -204,8 +210,8 @@ CLASS lhc_matrix IMPLEMENTATION.
                         DistributionChannel     = |{ wa_matrix_005-DistributionChannel ALPHA = IN }|    " '10'
                         OrganizationDivision    = |{ wa_matrix_005-OrganizationDivision ALPHA = IN }|   " '00'
                         SoldToParty             = |{ wa_matrix_005-SoldToParty ALPHA = IN }|            " '0010100014'
-                        PurchaseOrderByCustomer = wa_matrix_005-PurchaseOrderByCustomer
-                        RequestedDeliveryDate   = wa_matrix_005-RequestedDeliveryDate
+                        PurchaseOrderByCustomer = wa_matrix_005-PurchaseOrderByCustomer                " comes from SO
+                        RequestedDeliveryDate   = wa_matrix_005-RequestedDeliveryDate                  " comes from SO
                     )
                 )
             ).
@@ -244,8 +250,8 @@ CLASS lhc_matrix IMPLEMENTATION.
                     DistributionChannel
                     OrganizationDivision
                     SoldToParty
-                    PurchaseOrderByCustomer
-                    RequestedDeliveryDate
+                    PurchaseOrderByCustomer    " comes from SO
+                    RequestedDeliveryDate      " comes from SO
                 )
                 WITH it_salesorder
                 CREATE BY \_item
@@ -275,10 +281,12 @@ CLASS lhc_matrix IMPLEMENTATION.
                     %tky                    = key-%tky
                     CreationDate            = ls_so_head-CreationDate
                     CreationTime            = ls_so_head-CreationTime
+                    PurchaseOrderByCustomer = ls_so_head-PurchaseOrderByCustomer
+                    RequestedDeliveryDate   = ls_so_head-RequestedDeliveryDate
                  ) ).
                 MODIFY ENTITIES OF zi_matrix_005 IN LOCAL MODE
                     ENTITY Matrix
-                    UPDATE FIELDS ( CreationDate CreationTime )
+                    UPDATE FIELDS ( CreationDate CreationTime PurchaseOrderByCustomer RequestedDeliveryDate )
                     WITH it_matrix
                     FAILED failed
                     MAPPED mapped
@@ -330,8 +338,8 @@ CLASS lhc_matrix IMPLEMENTATION.
 *                    DistributionChannel
 *                    OrganizationDivision
                     SoldToParty
-                    PurchaseOrderByCustomer
-                    RequestedDeliveryDate
+                    PurchaseOrderByCustomer " comes from SO
+                    RequestedDeliveryDate   " comes from SO
                 )
                 WITH VALUE #( (
                     %key-SalesOrder         = wa_matrix_005-SalesOrderID                    " '0000000140'
@@ -682,10 +690,13 @@ CLASS lhc_matrix IMPLEMENTATION.
             SELECT SINGLE * FROM zmatrix_005d WHERE ( matrixuuid = @<entity>-MatrixUUID ) INTO @DATA(wa_matrix_draft).
 
 *           Set Plant (for ATP check)
-            DATA(salesOrganization) = |{ wa_matrix_draft-SalesOrganization ALPHA = IN }|. " 1000
+            DATA(salesOrganization)         = |{ wa_matrix_draft-SalesOrganization ALPHA = IN }|. " 1000
 
 *           Set Sold To Party
-            DATA(soldToParty)       = |{ wa_matrix_draft-SoldToParty ALPHA = IN }|. " '0010100014'
+            DATA(soldToParty)               = |{ wa_matrix_draft-SoldToParty ALPHA = IN }|. " '0010100014'
+
+*           Customer Reference (comes from SO)
+*           DATA(purchaseOrderByCustomer)   = <entity>-PurchaseOrderByCustomer.
 
 *           Set Customer URL
             DATA(customerURL)       = |/ui#Customer-displayFactSheet?sap-ui-tech-hint=GUI&/C_CustomerOP('| && condense( val = |{ wa_matrix_draft-soldtoparty ALPHA = OUT }| ) && |')|.
@@ -715,21 +726,35 @@ CLASS lhc_matrix IMPLEMENTATION.
 
             MODIFY ENTITIES OF zi_matrix_005 IN LOCAL MODE
                 ENTITY Matrix
-                UPDATE FIELDS ( CustomerURL ModelRef ModelRefURL ColorRef ColorRefURL CountryRef CountryRefURL MatrixTypeRef MatrixTypeRefURL SoldToParty Hidden22 )
+                UPDATE FIELDS (
+                    CustomerURL
+                    ModelRef
+                    ModelRefURL
+                    ColorRef
+                    ColorRefURL
+                    CountryRef
+                    CountryRefURL
+                    MatrixTypeRef
+                    MatrixTypeRefURL
+                    SoldToParty
+*                    PurchaseOrderByCustomer
+                    Hidden22
+                )
                 WITH VALUE #( (
-                    %is_draft           = is_draft
-                    %key                = <entity>-%key
-                    CustomerURL         = customerURL
-                    ModelRef            = modelRef
-                    ModelRefURL         = modelRefURL
-                    ColorRef            = colorRef
-                    ColorRefURL         = colorRefURL
-                    CountryRef          = countryRef
-                    CountryRefURL       = countryRefURL
-                    MatrixTypeRef       = matrixTypeRef
-                    MatrixTypeRefURL    = matrixTypeRefURL
-                    SoldToParty         = soldToParty
-                    Hidden22            = hidden22 " for fixing old matrix
+                    %is_draft               = <entity>-%is_draft " is_draft
+                    %key                    = <entity>-%key
+                    CustomerURL             = customerURL
+                    ModelRef                = modelRef
+                    ModelRefURL             = modelRefURL
+                    ColorRef                = colorRef
+                    ColorRefURL             = colorRefURL
+                    CountryRef              = countryRef
+                    CountryRefURL           = countryRefURL
+                    MatrixTypeRef           = matrixTypeRef
+                    MatrixTypeRefURL        = matrixTypeRefURL
+                    SoldToParty             = soldToParty
+*                   PurchaseOrderByCustomer = purchaseOrderByCustomer " Customer Reference (comes from SO)
+                    Hidden22                = hidden22 " for fixing old matrix
                 ) )
                 FAILED DATA(ls_failed1)
                 MAPPED DATA(ls_mapped1)
@@ -759,6 +784,7 @@ CLASS lhc_matrix IMPLEMENTATION.
                 i_matrixuuid    = <entity>-MatrixUUID
                 i_model         = <entity>-Model
                 i_color         = <entity>-Color
+                i_feature       = 'ACTIVATE'
             ).
 
 *           Check if product exists and mark cells in Size table
@@ -1746,17 +1772,17 @@ CLASS lhc_matrix IMPLEMENTATION.
                 )
                 TO reported-matrix.
             ENDIF.
-*           Customer Reference
-            IF ( <entity>-PurchaseOrderByCustomer IS INITIAL ).
-                APPEND VALUE #( %tky = <entity>-%tky ) TO failed-matrix.
-                APPEND VALUE #( %tky = <entity>-%tky
-                                %msg = new_message_with_text(
-                                    severity = if_abap_behv_message=>severity-error
-                                    text     = 'Customer Reference missing.'
-                                )
-                )
-                TO reported-matrix.
-            ENDIF.
+**           Customer Reference
+*            IF ( <entity>-PurchaseOrderByCustomer IS INITIAL ).
+*                APPEND VALUE #( %tky = <entity>-%tky ) TO failed-matrix.
+*                APPEND VALUE #( %tky = <entity>-%tky
+*                                %msg = new_message_with_text(
+*                                    severity = if_abap_behv_message=>severity-error
+*                                    text     = 'Customer Reference missing.'
+*                                )
+*                )
+*                TO reported-matrix.
+*            ENDIF.
 
         ENDIF.
 
@@ -1803,13 +1829,14 @@ CLASS lhc_matrix IMPLEMENTATION.
             plant = wa_matrix_draft-SalesOrganization.
     ENDCASE.
 
+
 *   Read Size Table (it always reads changed data)
     READ ENTITIES OF zi_matrix_005 IN LOCAL MODE
         ENTITY Matrix
         BY \_Size
         ALL FIELDS WITH VALUE #( (
-            %is_draft = is_draft
-            MatrixUUID = i_matrixuuid
+            %is_draft   = COND #( WHEN i_feature = 'ACTIVATE' THEN '01' ELSE is_draft )
+            MatrixUUID  = i_matrixuuid
         ) )
         RESULT DATA(lt_size)
         FAILED DATA(ls_failed1)
@@ -2214,13 +2241,13 @@ CLASS lhc_matrix IMPLEMENTATION.
     READ TABLE lt_sizehead INTO DATA(ls_sizehead1) WITH KEY SizeID = '1'.
     READ TABLE lt_sizehead INTO DATA(ls_sizehead2) WITH KEY SizeID = '2'.
 
-*   Read Sizes
+*   Read Sizes (changed values)
     READ ENTITIES OF zi_matrix_005 IN LOCAL MODE
         ENTITY Matrix
         BY \_Size
         ALL FIELDS
         WITH VALUE #( (
-            %tky-%is_draft  = is_draft
+            %tky-%is_draft  = '01' " is_draft
             %tky-MatrixUUID = i_matrixuuid
         ) )
         RESULT DATA(lt_size)
@@ -2822,18 +2849,17 @@ CLASS lsc_zi_matrix_005 IMPLEMENTATION.
                     <fs_so_mapped>-SalesOrder = ls_so_key-SalesOrder.
                     DATA(salesOrderID)  = ls_so_key-SalesOrder.
                     DATA(salesOrderURL) = |/ui#SalesOrder-manageV2&/SalesOrderManage('| && condense( val = |{ ls_so_key-SalesOrder ALPHA = OUT }| ) && |')|.
-                    UPDATE zmatrix_005 SET SalesOrderID = @salesOrderID, SalesOrderURL = @salesOrderURL WHERE ( matrixuuid = @wa_matrix-MatrixUUID ).
+                    UPDATE zmatrix_005 SET SalesOrderID = @salesOrderID, SalesOrderURL = @salesOrderURL  WHERE ( matrixuuid = @wa_matrix-MatrixUUID ).
+*                    SELECT SINGLE * FROM I_SalesOrder WHERE ( SalesOrder = @salesOrderID ) INTO @DATA(salesOrder).
+*                    DATA(purchaseOrderByCustomer)   = salesOrder-PurchaseOrderByCustomer.
+*                    DATA(requestedDeliveryDate)     = salesOrder-RequestedDeliveryDate.
+*                    UPDATE zmatrix_005 SET SalesOrderID = @salesOrderID, SalesOrderURL = @salesOrderURL, PurchaseOrderByCustomer = @purchaseOrderByCustomer, RequestedDeliveryDate = @requestedDeliveryDate WHERE ( matrixuuid = @wa_matrix-MatrixUUID ).
                 ENDLOOP.
             ENDIF.
 
         ENDIF.
 
     ENDLOOP.
-
-*    IF ( zbp_i_matrix_005=>mapped_matrix_uuid IS NOT INITIAL ).
-*       Check Material and Update Quantity on Sizes
-*        check_sizes_internal( zbp_i_matrix_005=>mapped_matrix_uuid ).
-*    ENDIF.
 
   ENDMETHOD. " save_modified
 
